@@ -57,8 +57,9 @@ while True:
                 money.money_slips_user['20'] = value_int // 20
                 value_int = value_int - value_int // 20 * 20
 
-            #if value_int != 0:
-            #    print("O caixa não tem cédulas disponíveis para este valor!")
+            if value_int != 0:
+                print("O caixa não tem cédulas disponíveis para este valor!")
+                print(" ")
             else:
                 for money_bill in money.money_slips_user:
                     money.money_slips[money_bill] -= money.money_slips_user[money_bill]
@@ -66,10 +67,12 @@ while True:
                 print(money.money_slips_user)
 
             print("Saldo Anterior: R$ %s" % accounts.account_list[account_typed]['value'])
+            print("")
             if int(value_type) <= accounts.account_list[account_typed]['value']:
                 accounts.account_list[account_typed]['value'] -= int(value_type)
             else:
-               print("Saldo insuficiente!")
+               print("Saldo insuficiente para a operação!")
+               print("")
             print("Saldo atualizado: R$ %s" % accounts.account_list[account_typed]['value'])
 
         elif option_typed == '10' and accounts.account_list[account_typed]['admin']:
