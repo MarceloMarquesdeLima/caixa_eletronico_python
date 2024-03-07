@@ -19,6 +19,8 @@ while True:
         print(" ")
         print("************* Menu de opções ************************")
         print("1 - Saldo")
+        if accounts.account_list[account_typed]['admin'] == False:
+            print("2 - Deposito")
         if accounts.account_list[account_typed]['admin']:
             print("10 - Incluir cédulas")
         print("*****************************************************")
@@ -30,12 +32,23 @@ while True:
         if option_typed == '1':
             #print("Seu saldo é: " + accounts.account_list[account_typed]['value'])
             print("Seu saldo é: R$ %s" % accounts.account_list[account_typed]['value'])
+
+        elif option_typed == '2' and accounts.account_list[account_typed]['admin'] == False:
+            amount_type = input("Digite valor do deposito: R$ ")
+            print("Saldo Anterior: R$ %s" % accounts.account_list[account_typed]['value'])
+            accounts.account_list[account_typed]['value'] += int(amount_type)
+            print("Saldo atualizado: R$ %s" % accounts.account_list[account_typed]['value'])
+
         elif option_typed == '10' and accounts.account_list[account_typed]['admin']:
             amount_type = input("Digite a quantidade de cédulas: ")
             money_bill_type = input("Digite o valor da tipo de cédulas: ")
             #money.money_slips[money_bill_type] = money.money_slips[money_bill_type] + int(amount_type)
             money.money_slips[money_bill_type] += int(amount_type)
             print(money.money_slips)
+
+            print('Saldo Anterior R$ %s' % accounts.account_list[account_typed]['value'])
+            accounts.account_list[account_typed]['value'] += int(amount_type) * int(money_bill_type)
+            print('Saldo Atualizado R$ %s' % accounts.account_list[account_typed]['value'])
     else:
         print("Conta inválida!")
 
