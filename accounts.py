@@ -2,7 +2,7 @@ account_list = {
     '0001-02': {
         'password': '12345',
         'name': 'Marcelo Marques de Lima',
-        'value': 100,
+        'value': 300,
         'admin': False
     },
     '0002-02': {
@@ -14,7 +14,7 @@ account_list = {
     '1111-11': {
         'password': '54321',
         'name': 'Admin Banco',
-        'value': 500,
+        'value': 1000,
         'admin': True
     }
 }

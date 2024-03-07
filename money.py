@@ -3,3 +3,7 @@ money_slips = {
     '50': 5,
     '100': 5
 }
+
+money_slips_user = {
+
+}
