@@ -31,7 +31,6 @@ while True:
         option_typed = input('Escolha uma das opções acima: ')
         print(" ")
         if option_typed == '1':
-            #print("Seu saldo é: " + accounts.account_list[account_typed]['value'])
             print("Seu saldo é: R$ %s" % accounts.account_list[account_typed]['value'])
 
         elif option_typed == '2' and accounts.account_list[account_typed]['admin'] == False:
@@ -78,9 +77,7 @@ while True:
         elif option_typed == '10' and accounts.account_list[account_typed]['admin']:
             amount_type = input("Digite a quantidade de cédulas: ")
             money_bill_type = input("Digite o valor da tipo de cédulas: ")
-            #money.money_slips[money_bill_type] = money.money_slips[money_bill_type] + int(amount_type)
             money.money_slips[money_bill_type] += int(amount_type)
-            #print(money.money_slips)
             print(" ")
 
             print('Saldo Anterior R$ %s' % accounts.account_list[account_typed]['value'])
@@ -94,21 +91,4 @@ while True:
 
     clear = 'cls' if os.name == 'nt' else 'clear'
     os.system(clear)
-
-
-
-
-#Outra forma de fazer validação
-#flag = False
-#for account in accounts.account_list:
-#    if account_typed == account['agency'] and password_typed == account['password']:
-#        flag = True
-#        print('Conta válida')
-#if not flag:
-#    print('Conta Inválida')
-
-    # Outra forma de limpar tela
-    #if os.name == 'nt': #Windows
-    #    os.system('cls')
-    #else:
-    #    os.system("clear")
+    
