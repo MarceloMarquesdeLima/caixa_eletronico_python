@@ -1,41 +1,39 @@
-import getpass
 import accounts
 import clear
 import tela
 import money
+import auth
 
 
 def main():
     tela.header()
-    account_typed = input("Insira sua Conta: ")
-    password_typed = getpass.getpass('Digite sua senha: ')
-
-    if account_typed in accounts.account_list and password_typed == accounts.account_list[account_typed]['password']:
+    authorization = auth.auth_account()
+    if authorization: 
         clear.limpar()
         tela.header()
         print(" ")
         print("************* Menu de opções ************************")
         print("1 - Saldo")
-        if accounts.account_list[account_typed]['admin'] == False:
+        if accounts.account_list[authorization]['admin'] == False:
             print("2 - Deposito")
         print("3 - Saque")
-        if accounts.account_list[account_typed]['admin']:
+        if accounts.account_list[authorization]['admin']:
             print("10 - Incluir cédulas")
         print("*****************************************************")
         print(" ")
-        name = accounts.account_list[account_typed]['name']
+        name = accounts.account_list[authorization]['name']
         print("Seja bem-vindo ao banco XPTO Sr(a) " + name)
         option_typed = input('Escolha uma das opções acima: ')
         print(" ")
         if option_typed == '1':
-            print("Seu saldo é: R$ %s" % accounts.account_list[account_typed]['value'])
+            print("Seu saldo é: R$ %s" % accounts.account_list[authorization]['value'])
 
-        elif option_typed == '2' and accounts.account_list[account_typed]['admin'] == False:
+        elif option_typed == '2' and accounts.account_list[authorization]['admin'] == False:
             amount_type = input("Digite valor do deposito: R$ ")
             print(" ")
-            print("Saldo Anterior: R$ %s" % accounts.account_list[account_typed]['value'])
-            accounts.account_list[account_typed]['value'] += int(amount_type)
-            print("Saldo atualizado: R$ %s" % accounts.account_list[account_typed]['value'])
+            print("Saldo Anterior: R$ %s" % accounts.account_list[authorization]['value'])
+            accounts.account_list[authorization]['value'] += int(amount_type)
+            print("Saldo atualizado: R$ %s" % accounts.account_list[authorization]['value'])
 
         elif option_typed == '3':
             value_type = input("Digite valor do saque: R$ ")
@@ -62,24 +60,24 @@ def main():
                 print("Pegue as notas: ")
                 print(money.money_slips_user)
 
-            print("Saldo Anterior: R$ %s" % accounts.account_list[account_typed]['value'])
+            print("Saldo Anterior: R$ %s" % accounts.account_list[authorization]['value'])
             print("")
-            if int(value_type) <= accounts.account_list[account_typed]['value']:
-                accounts.account_list[account_typed]['value'] -= int(value_type)
+            if int(value_type) <= accounts.account_list[authorization]['value']:
+                accounts.account_list[authorization]['value'] -= int(value_type)
             else:
                print("Saldo insuficiente para a operação!")
                print("")
-            print("Saldo atualizado: R$ %s" % accounts.account_list[account_typed]['value'])
+            print("Saldo atualizado: R$ %s" % accounts.account_list[authorization]['value'])
 
-        elif option_typed == '10' and accounts.account_list[account_typed]['admin']:
+        elif option_typed == '10' and accounts.account_list[authorization]['admin']:
             amount_type = input("Digite a quantidade de cédulas: ")
             money_bill_type = input("Digite o valor da tipo de cédulas: ")
             money.money_slips[money_bill_type] += int(amount_type)
             print(" ")
 
-            print('Saldo Anterior R$ %s' % accounts.account_list[account_typed]['value'])
-            accounts.account_list[account_typed]['value'] += int(amount_type) * int(money_bill_type)
-            print('Saldo Atualizado R$ %s' % accounts.account_list[account_typed]['value'])
+            print('Saldo Anterior R$ %s' % accounts.account_list[authorization]['value'])
+            accounts.account_list[authorization]['value'] += int(amount_type) * int(money_bill_type)
+            print('Saldo Atualizado R$ %s' % accounts.account_list[authorization]['value'])
     else:
         print("Conta inválida!")
     
