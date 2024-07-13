@@ -11,19 +11,8 @@ def main():
     if authorization: 
         clear.limpar()
         tela.header()
-        print(" ")
-        print("************* Menu de opções ************************")
-        print("1 - Saldo")
-        if accounts.account_list[authorization]['admin'] == False:
-            print("2 - Deposito")
-        print("3 - Saque")
-        if accounts.account_list[authorization]['admin']:
-            print("10 - Incluir cédulas")
-        print("*****************************************************")
-        print(" ")
-        name = accounts.account_list[authorization]['name']
-        print("Seja bem-vindo ao banco XPTO Sr(a) " + name)
-        option_typed = input('Escolha uma das opções acima: ')
+        
+        option_typed = get_menu_options_type(authorization)
         print(" ")
         if option_typed == '1':
             print("Seu saldo é: R$ %s" % accounts.account_list[authorization]['value'])
@@ -80,7 +69,22 @@ def main():
             print('Saldo Atualizado R$ %s' % accounts.account_list[authorization]['value'])
     else:
         print("Conta inválida!")
-    
+
+def get_menu_options_type(authorization):
+    print(" ")
+    print("************* Menu de opções ************************")
+    print("1 - Saldo")
+    if accounts.account_list[authorization]['admin'] == False:
+        print("2 - Deposito")
+        print("3 - Saque")
+    if accounts.account_list[authorization]['admin']:
+        print("10 - Incluir cédulas")
+    print("*****************************************************")
+    print(" ")
+    name = accounts.account_list[authorization]['name']
+    print("Seja bem-vindo ao banco XPTO Sr(a) " + name)
+    return input('Escolha uma das opções acima: ')
+          
 
 while True:
     main()
