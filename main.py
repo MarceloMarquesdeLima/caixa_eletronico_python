@@ -1,21 +1,18 @@
 import getpass
-import os
 import accounts
+import clear
+import tela
 import money
 
-while True:
-    print(" ")
-    print("*****************************************************")
-    print("************ Caixa Eletrônico - MQS *****************")
-    print("*****************************************************")
+
+def main():
+    tela.header()
     account_typed = input("Insira sua Conta: ")
     password_typed = getpass.getpass('Digite sua senha: ')
 
     if account_typed in accounts.account_list and password_typed == accounts.account_list[account_typed]['password']:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("*****************************************************")
-        print("************ Caixa Eletrônico - MQS *****************")
-        print("*****************************************************")
+        clear.limpar()
+        tela.header()
         print(" ")
         print("************* Menu de opções ************************")
         print("1 - Saldo")
@@ -85,10 +82,13 @@ while True:
             print('Saldo Atualizado R$ %s' % accounts.account_list[account_typed]['value'])
     else:
         print("Conta inválida!")
+    
 
-    print(" ")
+while True:
+    main()
+    
     input('Precione <<ENTER>> para continuar')
-
-    clear = 'cls' if os.name == 'nt' else 'clear'
-    os.system(clear)
+    
+    clear.limpar()
+        
     
