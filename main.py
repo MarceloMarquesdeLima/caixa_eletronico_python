@@ -84,7 +84,7 @@ def get_menu_options_type(authorization):
     name = accounts.account_list[authorization]['name']
     print("Seja bem-vindo ao banco XPTO Sr(a) " + name)
     return input('Escolha uma das opções acima: ')
-          
+    
 
 while True:
     main()
